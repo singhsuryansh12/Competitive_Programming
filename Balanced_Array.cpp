@@ -18,38 +18,19 @@ int main(void){
                 sum = sum + arr[j];
             }
             val = sum/hn;
-            if(hn%2==0){
-                for(j=2,k=0;k<(hn/2);k++){
-                    arr[hn+k] = val - j;
-                    j=j+2;
-                }
-                for(j=2,k=0;k<(hn/2);k++){
-                    arr[3*hn/2 + k] = val + j;
-                    j=j+2;
-                }
-                cout<<"YES"<<endl;
-                for(j=0;j<n;j++){
-                    cout<<arr[j]<<" ";
-                }
-                cout<<endl;
+            for(j=2,k=0;k<(hn/2);k++){
+                arr[hn+k] = val - j;
+                j=j+2;
             }
-            else{
-                arr[(hn-1) + (hn+1)/2] = val;
-                for(j=2,k=((hn-1) + (hn+1)/2 -1);k>(hn-1);k--){
-                    arr[k] = val - j;
-                    j=j+2;
-                }
-                for(j=2,k=((hn-1) + (hn+1)/2 +1);k<(n);k++){
-                    arr[k] = val + j;
-                    j=j+2;
-                }
-                cout<<"YES"<<endl;
-                for(j=0;j<n;j++){
-                    cout<<arr[j]<<" ";
-                }
-                cout<<endl;
+            for(j=2,k=0;k<(hn/2);k++){
+                arr[3*hn/2 + k] = val + j;
+                j=j+2;
             }
-
+            cout<<"YES"<<endl;
+            for(j=0;j<n;j++){
+                cout<<arr[j]<<" ";
+            }
+            cout<<endl;
         }
     }
 }
