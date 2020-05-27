@@ -39,36 +39,37 @@ const int N = 3e5, M = N;
 //=======================
 
 vi g[N];
-int a[N];
+ll int a[N],dp[N];
 
 int main() {
     ios_base::sync_with_stdio(0);
-    ll int t, i, j, k, p, q, r=0, x, y, u, v, n, m;
+    ll int t, i, j, k, p,ans,mx, q, r, x, y, u, v, n, m;
     cin>>t;
     fo(i,t){
-      cin>>n>>k;
-      if(k==n){
-        cout<<1<<endl;
-        continue;
-      }
-      if(k==1){
-        cout<<n<<endl;
-        continue;
-      }
-      p=1;
-      for(j=1;j<=sqrt(n) && j<=k;j++){
-        if(n%j==0){
-          if(n/j<=k){
-            cout<<j<<endl;
-            break;
-          }
-          else{
-            p=j;
-          }
+        ans=1;
+        cin>>n;
+        fo(j,n){
+            cin>>a[j+1];
+            dp[j+1] = 1;
         }
-      }
-      if(j>sqrt(n) || j>k)
-        cout<<n/p<<endl;
+        for(j=2;j<=n;j++){
+            mx=0;
+            for(k=1;k*k<=j;k++){
+                if(j%k==0){
+                    x=k;
+                    y=j/k;
+                    if(a[x] < a[j]){
+                        mx = max(mx,dp[x]);
+                    }
+                    if(a[y] < a[j]){
+                        mx = max(mx,dp[y]);
+                    }
+                }
+            }
+            dp[j]+= mx;
+            ans = max(dp[j],ans);
+        } 
+        cout<<ans<<endl;
     }
     return 0;
 }

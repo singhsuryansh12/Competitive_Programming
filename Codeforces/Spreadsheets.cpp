@@ -43,32 +43,61 @@ int a[N];
 
 int main() {
     ios_base::sync_with_stdio(0);
-    ll int t, i, j, k, p, q, r=0, x, y, u, v, n, m;
+    ll int t,colen, i, j, k=0, p, q, r, x, y, u,rowlen, v, n, m;
     cin>>t;
     fo(i,t){
-      cin>>n>>k;
-      if(k==n){
-        cout<<1<<endl;
-        continue;
-      }
-      if(k==1){
-        cout<<n<<endl;
-        continue;
-      }
-      p=1;
-      for(j=1;j<=sqrt(n) && j<=k;j++){
-        if(n%j==0){
-          if(n/j<=k){
-            cout<<j<<endl;
-            break;
-          }
-          else{
-            p=j;
-          }
+        r=0;
+        k=0;
+        string s,str,row,column;
+        cin>>s;
+        if(cpresent(s,'R') && cpresent(s,'C') && (s[1]=='1' || s[1]=='2' || s[1]=='3' || s[1]=='4' || s[1]=='5' || s[1]=='6' || s[1]=='7' || s[1]=='8' || s[1]=='9')){
+            rowlen = s.find('C') - 1;
+            r=0;
+            for(j=1;rowlen>=0;j++){
+                row = row  + s[j];
+                rowlen--;
+            }
+            r = stoi(row);
+            colen= s.length() - s.find('C') - 1;
+            for(j=s.find('C') +1;j<s.length();j++){
+                column = column + s[j];
+                colen--;
+            }
+            k=stoi(column);
+            q=0;
+            while(k!=0){
+                p=k%26;
+                if(p==0){
+                    str[q++] = 'Z';
+                    k= k/26;
+                    k--;
+                }
+                else{
+                    str[q++] = (p-1) + 'A';
+                    k /= 26;
+                }
+            }
+            for(j=q-1;j>=0;j--){
+                cout<<str[j];
+            }
+            cout<<r<<endl;
         }
-      }
-      if(j>sqrt(n) || j>k)
-        cout<<n/p<<endl;
+        else{
+            k=0;
+            string col,ro;
+            for(j=0;s[j]!='1' && s[j]!='2' && s[j]!='3' && s[j]!='4' && s[j]!='5' && s[j]!='6' && s[j]!='7' && s[j]!='8' && s[j]!='9';j++){
+                col = col + s[j];
+            }
+            colen = j;
+            for(j=j-1,x=0;j>=0;j--,x++){
+                p = (ll int)col[j] - (ll int)int('A') + 1;
+                k = k + p*pow(26,x);
+            }
+            for(j=colen;j<s.length();j++){
+                ro = ro + s[j];
+            }
+            cout<<'R'<<ro<<'C'<<k<<endl;
+        }
     }
     return 0;
 }
